@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Delete {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="delete-confirmation-container card">
+    <div class="card-content">
+        <span class="card-title">Delete Book</span>
+        <h4>Are you sure you want to delete "{{ object.title }}"?</h4>
+        <p>This action cannot be undone.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn waves-effect waves-light red">Yes, Delete</button>
+            <a href="{% url 'books_detail' object.id %}" class="btn waves-effect waves-light grey">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

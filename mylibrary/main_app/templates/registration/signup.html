@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="form-container card">
+    <div class="card-content">
+        <span class="card-title">Sign Up for myLibrary</span>
+        {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
+        <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn waves-effect waves-light deep-purple accent-2">Sign Up</button>
+        </form>
+        <p class="center-align">Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+    </div>
+</div>
+{% endblock %}

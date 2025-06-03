@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{% if object %}Edit Tag{% else %}Add a Tag{% endif %}{% endblock %}
+
+{% block content %}
+<div class="form-container card">
+    <div class="card-content">
+        {% if object %}
+            <span class="card-title">Edit Tag: {{ object.name }}</span>
+        {% else %}
+            <span class="card-title">Add a New Tag</span>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn waves-effect waves-light deep-purple accent-2">
+                {% if object %}Save Changes{% else %}Add Tag{% endif %}
+            </button>
+            <a href="{% if object %}{% url 'tags_detail' object.id %}{% else %}{% url 'tags_index' %}{% endif %}" class="btn waves-effect waves-light grey">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

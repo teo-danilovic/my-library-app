@@ -1,0 +1,192 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #f4f4f8; /* Light grey background */
+    color: #333; /* Dark grey text for contrast */
+}
+
+main {
+    flex: 1 0 auto;
+    padding-bottom: 20px;
+}
+
+footer.page-footer {
+    padding-top: 0;
+    text-align: right;
+}
+
+/* Navbar */
+nav {
+    background-color: #00695c; /* Teal darken-3 for good contrast with white text */
+}
+nav .brand-logo {
+    font-weight: bold;
+}
+nav ul a {
+    color: #ffffff; /* White text for nav links */
+}
+nav ul a:hover {
+    background-color: rgba(0,0,0,0.1); /* Slight hover effect */
+}
+
+/* Cards */
+.card {
+    margin: 1rem 0;
+    border: 1px solid #e0e0e0; /* Subtle border */
+    border-radius: 8px; /* Softer corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Soft shadow */
+}
+.card .card-title {
+    font-weight: 500;
+    color: #004d40; /* Teal darken-4 for card titles */
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: #00796b; /* Teal darken-1 for card action links */
+    margin-right: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.card .card-action a:hover {
+    color: #004d40; /* Teal darken-4 on hover */
+}
+
+/* Buttons */
+.btn, .btn-small, .btn-large {
+    border-radius: 20px; /* Rounded buttons */
+    text-transform: none; /* More casual button text */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.btn:hover, .btn-small:hover, .btn-large:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+/* Specific button colors for good contrast and meaning */
+.btn.green { background-color: #4CAF50 !important; } /* Standard Green */
+.btn.red { background-color: #f44336 !important; } /* Standard Red */
+.btn.orange { background-color: #FF9800 !important; } /* Standard Orange */
+.btn.blue { background-color: #2196F3 !important; } /* Standard Blue */
+.btn.deep-purple.accent-2 { background-color: #7e57c2 !important; } /* Purple from Materialize */
+
+/* Forms */
+.form-container {
+    padding: 20px;
+}
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #00796b; /* Teal darken-1 */
+  box-shadow: 0 1px 0 0 #00796b; /* Teal darken-1 */
+}
+
+/* Book List / Card Links */
+.book-link, .tag-link {
+    text-decoration: none;
+    color: inherit;
+}
+.book-link .card:hover, .tag-link .chip:hover {
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    transform: translateY(-2px);
+    transition: all .2s ease-in-out;
+}
+
+/* Book Detail Page Layout */
+.book-detail-container .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.book-detail-container .col.m7 { /* Main content */
+    flex-basis: 60%;
+}
+.book-detail-container .col.m5 { /* Sidebar */
+    flex-basis: 40%;
+    padding-left: 20px; /* Spacing between main and sidebar */
+}
+@media (max-width: 992px) { /* For medium screens and down */
+    .book-detail-container .col.m7,
+    .book-detail-container .col.m5 {
+        flex-basis: 100%;
+        padding-left: 0;
+    }
+}
+
+/* Tags */
+.tags-list .chip {
+    margin: 5px;
+    color: #000000; /* Ensure text on chip is readable */
+}
+.tags-list .chip a {
+    color: inherit; /* Make link inside chip inherit color */
+}
+.tags-list .chip .remove-tag-link {
+    cursor: pointer;
+    float: right;
+    font-size: 16px;
+    line-height: 28px; /* Adjust to vertically center */
+    padding-left: 8px;
+    color: rgba(0,0,0,0.6);
+}
+.tags-list .chip .remove-tag-link:hover {
+    color: #000;
+}
+
+/* Responsive images */
+.book-photos img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* Home page specific styling */
+.home-container {
+    text-align: center;
+    padding: 40px 20px;
+}
+.home-container h1 {
+    color: #004d40; /* Teal darken-4 */
+}
+
+/* About page specific styling */
+.about-container ul {
+    list-style-type: disc;
+    padding-left: 40px;
+}
+.about-container ul li {
+    margin-bottom: 10px;
+}
+
+/* Delete confirmation */
+.delete-confirmation-container h4 {
+    color: #d32f2f; /* Red darken-2 for warning */
+}
+
+/* File input basic styling */
+.file-input {
+    margin-bottom: 10px;
+}
+
+/* Ensure good contrast for all text on colored backgrounds */
+/* This is a general rule; specific cases might need overrides */
+[style*="background-color"] {
+    /* Example: If a dark background color is set, ensure text is light */
+    /* This is hard to automate perfectly with just CSS without knowing the exact colors beforehand */
+    /* The Materialize default usually handles this well for its components */
+}
+
+/* Accessibility: Focus indicators for keyboard navigation */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    outline: 2px solid #2196F3; /* Bright blue outline */
+    outline-offset: 2px;
+}
