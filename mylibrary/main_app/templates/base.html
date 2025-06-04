@@ -25,11 +25,14 @@
                         <li><a href="{% url 'books_index' %}">My Books</a></li>
                         <li><a href="{% url 'books_create' %}">Add a Book</a></li>
                         <li>
-                            <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: inline;">
-                                {% csrf_token %}
-                                <button type="submit" class="btn-link-style">Log Out ({{ user.username }})</button>
-                            </form>                    {% else %}
-                        <li><a href="{% url 'login' %}?next={% url 'books_index' %}">Log In</a></li>
+                                <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out ({{ user.username }})</a>
+                            </li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}?next={% url 'books_index' %}">Log In</a></li>
+
                         <li><a href="{% url 'signup' %}">Sign Up</a></li>
                     {% endif %}
                 </ul>
