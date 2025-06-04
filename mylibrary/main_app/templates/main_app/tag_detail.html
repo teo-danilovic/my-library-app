@@ -4,7 +4,7 @@
 {% block content %}
 <div class="tag-detail-container">
     <h1>Tag: <span style="color: {{ tag.color|default:'#333' }};">{{ tag.name }}</span></h1>
-    <p style="background-color: {{ tag.color|default:'#e0e0e0' }}; display: inline-block; padding: 5px 10px; border-radius: 3px;">
+    <p style="background-color: {{ tag.color|default:'#e0e0e0' }}; display: inline-block; padding: 5px px; border-radius: 3px;">
         Color: {{ tag.color }}
     </p>
     <hr>
@@ -16,7 +16,7 @@
     {% if tag.book_set.all %}
         <div class="row">
         {% for book in tag.book_set.all %}
-            {% if book.user == user %} {# Only show books belonging to the current user #}
+            {% if book.user == user %} 
             <div class="col s12 m6 l4">
                 <a href="{% url 'books_detail' book.id %}" class="book-link">
                     <div class="card">
@@ -31,7 +31,7 @@
             {% endif %}
         {% endfor %}
         </div>
-        {% if not tag.book_set.all|length %}  {# Check if any books were actually displayed #}
+        {% if not tag.book_set.all|length %}  
             <p>You have no books with this tag.</p>
         {% endif %}
     {% else %}

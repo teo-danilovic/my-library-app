@@ -38,14 +38,12 @@
                 {% endfor %}
             {% endif %}
             
-            <br><br> {# Simple spacing, adjust as needed #}
+            <br><br> 
             <button type="submit" class="btn waves-effect waves-light deep-purple accent-2">Log In</button>
             <input type="hidden" name="next" value="{{ next }}">
         </form>
         <br>
         <p class="center-align">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
-        {# You can also add a "Forgot password?" link here if you implement password reset later #}
-        {# <p><a href="{% url 'password_reset' %}">Forgot password?</a></p> #}
     </div>
 </div>
 {% endblock %}

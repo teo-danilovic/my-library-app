@@ -79,12 +79,12 @@ def add_reading_session(request, book_id):
 def delete_reading_session(request, book_id, session_id):
     book = get_object_or_404(Book, id=book_id, user=request.user)
     session = get_object_or_404(ReadingSession, id=session_id, book=book)
-    if request.method == 'POST': # Ensure it's a POST request for deletion
+    if request.method == 'POST': 
         session.delete()
         return redirect('books_detail', book_id=book_id)
-    return redirect('books_detail', book_id=book_id) # Or an error page
+    return redirect('books_detail', book_id=book_id) 
 
-# --- Tag Views (These are global, not user-specific for creation/listing) ---
+# --- Tag Views  ---
 class TagList(LoginRequiredMixin, ListView): 
     model = Tag
     template_name = 'main_app/tag_list.html'
@@ -165,14 +165,12 @@ def cover_image_delete(request, book_id):
         print(e)
     return redirect('books_detail', book_id=book_id)
 
-# rb - read bytes wb - write bytes 
 
 # --- Signup View ---
-# main_app/views.py
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm # Keep this
+from django.contrib.auth.forms import UserCreationForm 
 
 def signup(request):
     if request.method == 'POST':

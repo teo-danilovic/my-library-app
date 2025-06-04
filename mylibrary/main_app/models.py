@@ -10,11 +10,11 @@ STATUS_CHOICES = (
     ('DNF', 'Did Not Finish'),
 )
 
-RATING_CHOICES = [(i, str(i)) for i in range(1, 6)] # 1 to 5 stars
+RATING_CHOICES = [(i, str(i)) for i in range(1, 6)] 
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    color = models.CharField(max_length=20, default='#DDDDDD') # Hex color
+    color = models.CharField(max_length=20, default='#DDDDDD') 
 
     def __str__(self):
         return self.name
@@ -45,7 +45,7 @@ class Book(models.Model):
         return reverse('books_detail', kwargs={'book_id': self.id})
 
     class Meta:
-        ordering = ['-created_at'] # Show newest books first by default
+        ordering = ['-created_at'] 
 
 class ReadingSession(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reading_sessions')
@@ -65,10 +65,9 @@ class ReadingSession(models.Model):
     class Meta:
         ordering = ['-date_started']
 
-class Photo(models.Model): # For Book Covers
+class Photo(models.Model): 
     key = models.CharField(max_length=200)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='photos')
 
     def __str__(self):
         return f"Photo for book_id: {self.book_id} @{self.key}"
-# Create your models here.

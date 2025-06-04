@@ -6,7 +6,6 @@
     <div class="card-content">
         <span class="card-title">Sign Up for myLibrary</span>
 
-        {# Display non-field errors (e.g., issues not specific to one field, though UserCreationForm mostly has field errors) #}
         {% if form.non_field_errors %}
             <div class="red-text">
                 {% for error in form.non_field_errors %}
@@ -15,23 +14,18 @@
             </div>
         {% endif %}
 
-        {# The generic error_message from the view is no longer the primary way to show errors #}
-        {# {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %} #}
-
-
         <form method="POST" action="{% url 'signup' %}">
             {% csrf_token %}
 
-            {# Iterate over visible fields in the form #}
             {% for field in form.visible_fields %}
-                <div class="input-field field-wrapper"> {# Materialize class for styling, or your own #}
+                <div class="input-field field-wrapper">
                     {{ field.label_tag }}
-                    {{ field }} {# This renders the input widget; it will retain its value on error #}
+                    {{ field }} 
                     {% if field.help_text %}
                         <small class="form-text text-muted">{{ field.help_text|safe }}</small>
                     {% endif %}
                     {% if field.errors %}
-                        <div class="red-text field-errors"> {# Styling for field-specific errors #}
+                        <div class="red-text field-errors"> 
                             {% for error in field.errors %}
                                 <p>{{ error }}</p>
                             {% endfor %}
@@ -40,17 +34,13 @@
                 </div>
             {% endfor %}
             
-            {# If you want to render hidden fields, though UserCreationForm doesn't have many relevant ones #}
-            {# {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %} #}
-
-            <br> {# Simple spacing #}
+            <br> 
             <button type="submit" class="btn waves-effect waves-light deep-purple accent-2">Sign Up</button>
         </form>
         <p class="center-align" style="margin-top: 15px;">Already have an account? <a href="{% url 'login' %}?next={% url 'books_index' %}">Log In</a></p>
     </div>
 </div>
 
-{# Optional: Add some basic CSS for field wrappers and errors if not handled by Materialize #}
 <style>
     .field-wrapper {
         margin-bottom: 1rem;

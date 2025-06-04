@@ -30,7 +30,7 @@ urlpatterns = [
     path('books/<int:book_id>/add_photo/', views.add_photo, name='add_photo'),
     path('books/covers/<str:cover_id>/', views.cover_image, name='cover_image'),
     path('books/<int:book_id>/covers/delete/', views.cover_image_delete, name='delete_photos'),
-    # Authv
+    # Auth
     path('accounts/signup/', views.signup, name='signup'),
 
 ]
