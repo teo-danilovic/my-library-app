@@ -1,9 +1,13 @@
+from django.contrib import admin
 from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
+    
     # Book URLs
     path('books/', views.books_index, name='books_index'),
     path('books/<int:book_id>/', views.books_detail, name='books_detail'),
@@ -23,8 +27,8 @@ urlpatterns = [
     path('books/<int:book_id>/assoc_tag/<int:tag_id>/', views.assoc_tag, name='assoc_tag'),
     path('books/<int:book_id>/unassoc_tag/<int:tag_id>/', views.unassoc_tag, name='unassoc_tag'),
     # Photo URL
-    # path('books/<int:book_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('books/<int:book_id>/add_photo/', views.add_photo, name='add_photo'),
     # Auth
     path('accounts/signup/', views.signup, name='signup'),
-    
+
 ]

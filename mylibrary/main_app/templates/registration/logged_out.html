@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="container" style="text-align: center; padding-top: 50px;">
+    <h2>You have been successfully logged out.</h2>
+    <p><a href="{% url 'home' %}" class="btn waves-effect waves-light teal">Go to Homepage</a></p>
+    <p style="margin-top: 20px;">
+        <a href="{% url 'login' %}?next={% url 'books_index' %}" class="btn waves-effect waves-light deep-purple accent-2">Log In Again</a>
+    </p>
+</div>
+{% endblock %}
