@@ -11,9 +11,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Book, Tag, Photo, ReadingSession
 from .forms import ReadingSessionForm, BookForm, TagForm
+from django.http import HttpResponse
 
-S3_BASE_URL = os.getenv('S3_BASE_URL', 'https://s3.amazonaws.com/')
-BUCKET = os.getenv('S3_BUCKET', 'your-default-bucket-name') 
+
 
 # --- Home and About ---
 def home(request):
@@ -128,24 +128,46 @@ def unassoc_tag(request, book_id, tag_id):
 # --- Photo (Book Cover) View ---
 @login_required
 def add_photo(request, book_id):
-    print(f"--- add_photo called for book_id: {book_id} ---")
-    print(f"AWS_ACCESS_KEY_ID set: {bool(os.getenv('AWS_ACCESS_KEY_ID'))}")
-    print(f"S3_BUCKET: {BUCKET}")
-    print(f"S3_BASE_URL: {S3_BASE_URL}")
     book = get_object_or_404(Book, id=book_id, user=request.user)
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
-        s3 = boto3.client('s3')
-        # Need a unique "key" for S3 / needs image file extension too
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
-            s3.upload_fileobj(photo_file, BUCKET, key)
-            url = f"{S3_BASE_URL}{key}"
-            Photo.objects.create(url=url, book=book)
+            with open(f"uploads/{key}", "wb") as file:
+                file.write(photo_file.read())
+
+            Photo.objects.create(key= key, book=book)
         except Exception as e:
-            print('An error occurred uploading file to S3')
+            print('An error occurred uploading file')
             print(e)
     return redirect('books_detail', book_id=book_id)
+
+
+# --- Photo (Book Cover) View ---
+def cover_image(request, cover_id):
+    try:
+        if os.path.exists(f"uploads/{cover_id}"):
+            with open(f"uploads/{cover_id}", "rb") as file: 
+                return HttpResponse(file.read())
+        else:
+            return HttpResponse(status=404)
+    except Exception as e:
+        print('An error occurred reading file')
+        print(e)
+
+def cover_image_delete(request, book_id):
+    try:
+        photos = Photo.objects.filter(book_id=book_id)
+        for photo in photos:
+            if os.path.exists(f"uploads/{photo.key}"):
+                os.remove(f"uploads/{photo.key}")
+            photo.delete()
+    except Exception as e:
+        print('An error occurred deleting file')
+        print(e)
+    return redirect('books_detail', book_id=book_id)
+
+# rb - read bytes wb - write bytes 
 
 # --- Signup View ---
 def signup(request):

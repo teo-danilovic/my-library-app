@@ -66,9 +66,9 @@ class ReadingSession(models.Model):
         ordering = ['-date_started']
 
 class Photo(models.Model): # For Book Covers
-    url = models.CharField(max_length=200)
+    key = models.CharField(max_length=200)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='photos')
 
     def __str__(self):
-        return f"Photo for book_id: {self.book_id} @{self.url}"
+        return f"Photo for book_id: {self.book_id} @{self.key}"
 # Create your models here.

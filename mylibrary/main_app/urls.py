@@ -28,7 +28,9 @@ urlpatterns = [
     path('books/<int:book_id>/unassoc_tag/<int:tag_id>/', views.unassoc_tag, name='unassoc_tag'),
     # Photo URL
     path('books/<int:book_id>/add_photo/', views.add_photo, name='add_photo'),
-    # Auth
+    path('books/covers/<str:cover_id>/', views.cover_image, name='cover_image'),
+    path('books/<int:book_id>/covers/delete/', views.cover_image_delete, name='delete_photos'),
+    # Authv
     path('accounts/signup/', views.signup, name='signup'),
 
 ]

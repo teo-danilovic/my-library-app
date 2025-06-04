@@ -39,7 +39,7 @@
                 <div class="row book-photos">
                     {% for photo in book.photos.all %}
                         <div class="col s12 m6 l4">
-                            <img class="responsive-img card-panel" src="{{photo.url}}" alt="Cover for {{ book.title }}">
+                            <img class="responsive-img card-panel" src="/books/covers/{{photo.key}}" alt="Cover for {{ book.title }}">
                         </div>
                     {% endfor %}
                 </div>
@@ -57,6 +57,8 @@
                         <br><br>
                         <button type="submit" class="btn waves-effect waves-light deep-purple accent-2">Upload Cover</button>
                     </form>
+                    <a href="{% url 'delete_photos' book.id %}" class="btn waves-effect waves-light red">Delete Covers</a>
+
                 </div>
             </div>
             {% endif %}

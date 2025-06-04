@@ -21,6 +21,18 @@
                 <a href="{% url 'books_detail' book.id %}" class="btn-small waves-effect waves-light blue">View Details</a>
             </div>
         </div>
+        {% if book.photos.all %}
+                <h2>Book Cover(s)</h2>
+                <div class="row book-photos">
+                    {% for photo in book.photos.all %}
+                        <div class="col s12 m6 l4">
+                            <img class="responsive-img card-panel" src="/books/covers/{{photo.key}}" alt="Cover for {{ book.title }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No cover image uploaded yet.</p>
+            {% endif %}
     </a>
     {% endfor %}
 {% else %}
@@ -28,3 +40,4 @@
 {% endif %}
 
 {% endblock %}
+
