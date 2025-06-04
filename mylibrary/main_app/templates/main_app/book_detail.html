@@ -39,7 +39,7 @@
                 <div class="row book-photos">
                     {% for photo in book.photos.all %}
                         <div class="col s12 m6 l4">
-                            <img class="responsive-img card-panel" src="/books/covers/{{photo.key}}" alt="Cover for {{ book.title }}">
+                            <img class="responsive-img card-panel" src="{% url 'cover_image' photo.key %}" alt="Cover for {{ book.title }}">
                         </div>
                     {% endfor %}
                 </div>
@@ -57,8 +57,9 @@
                         <br><br>
                         <button type="submit" class="btn waves-effect waves-light deep-purple accent-2">Upload Cover</button>
                     </form>
-                    <a href="{% url 'delete_photos' book.id %}" class="btn waves-effect waves-light red">Delete Covers</a>
-
+                    {% if book.photos.all %}
+                    <a href="{% url 'delete_photos' book.id %}" class="btn waves-effect waves-light red" style="margin-top: 10px;" onclick="return confirm('Are you sure you want to delete all covers for this book?');">Delete All Cover(s)</a>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -77,6 +78,7 @@
                 </div>
             </div>
             {% endif %}
+
 
             {% if book.reading_sessions.all %}
             <div class="card">
@@ -148,17 +150,17 @@
                     <div class="card-content">
                         <span class="card-title">Available Tags to Add</span>
                         <div class="tags-list">
-                        {% for tag in tags.all %}
-                            <a href="{% url 'assoc_tag' book.id tag.id %}">
-                                <span class="chip" style="background-color: {{ tag.color|default:'#e0e0e0' }}; color: #000;">
-                                    {{ tag.name }}
+                        {% for tag_to_add in tags.all %}
+                            <a href="{% url 'assoc_tag' book.id tag_to_add.id %}">
+                                <span class="chip" style="background-color: {{ tag_to_add.color|default:'#e0e0e0' }}; color: #000;">
+                                    {{ tag_to_add.name }}
                                 </span>
                             </a>
                         {% endfor %}
                         </div>
                     </div>
                 </div>
-                {% else %}
+                {% elif not book.tags.all %}
                     <p>No other tags available to add. <a href="{% url 'tags_create' %}">Create a new tag?</a></p>
                 {% endif %}
             {% endif %}
@@ -166,3 +168,20 @@
     </div>
 </div>
 {% endblock %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var dateElems = document.querySelectorAll('.datepicker');
+    M.Datepicker.init(dateElems, {
+        format: 'yyyy-mm-dd',
+        autoClose: true,
+    });
+
+    var selectElems = document.querySelectorAll('select');
+    M.FormSelect.init(selectElems);
+
+    var textareas = document.querySelectorAll('textarea.materialize-textarea');
+
+    M.updateTextFields();
+});
+</script>

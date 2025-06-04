@@ -6,7 +6,7 @@ from django.utils import timezone
 STATUS_CHOICES = (
     ('TR', 'To Read'),
     ('RG', 'Currently Reading'),
-    ('RD', 'Read'),
+    ('RD', 'Have Read'),
     ('DNF', 'Did Not Finish'),
 )
 

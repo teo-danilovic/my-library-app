@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('genre', models.CharField(blank=True, max_length=100)),
                 ('publication_year', models.IntegerField(blank=True, null=True)),
                 ('description', models.TextField(blank=True)),
-                ('status', models.CharField(choices=[('TR', 'To Read'), ('RG', 'Currently Reading'), ('RD', 'Read'), ('DNF', 'Did Not Finish')], default='TR', max_length=3)),
+                ('status', models.CharField(choices=[('TR', 'To Read'), ('RG', 'Currently Reading'), ('RD', 'Have Read'), ('DNF', 'Did Not Finish')], default='TR', max_length=3)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),

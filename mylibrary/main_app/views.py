@@ -1,6 +1,4 @@
-# Create your views here.
 import uuid
-# import boto3
 import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -170,16 +168,20 @@ def cover_image_delete(request, book_id):
 # rb - read bytes wb - write bytes 
 
 # --- Signup View ---
+# main_app/views.py
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm # Keep this
+
 def signup(request):
-    error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserCreationForm(request.POST) 
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('books_index')
-        else:
-            error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
+    else: 
+        form = UserCreationForm() 
+    context = {'form': form} 
     return render(request, 'registration/signup.html', context)
