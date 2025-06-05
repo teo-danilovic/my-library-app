@@ -15,3 +15,6 @@ dj-database-url = "*"
 
 [requires]
 python_version = "3.13"
+
+[scripts]
+postinstall = "python manage.py collectstatic --noinput"
