@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+<div class="form-container card">
+    <div class="card-content">
+        <span class="card-title">Log In to myLibrary</span>
+
+        {% if form.errors %}
+            <p class="red-text">Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p class="blue-text">Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+            {% else %}
+                <p class="blue-text">Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <p class="red-text text-darken-2">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <p class="red-text text-darken-2">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            
+            <br><br> 
+            <button type="submit" class="btn waves-effect waves-light deep-purple accent-2">Log In</button>
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+        <br>
+        <p class="center-align">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+    </div>
+</div>
+{% endblock %}

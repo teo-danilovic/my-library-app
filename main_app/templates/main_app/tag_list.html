@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}All Tags{% endblock %}
+
+{% block content %}
+<h1>All Tags</h1>
+<a href="{% url 'tags_create' %}" class="btn waves-effect waves-light green">Add New Tag</a>
+<hr>
+{% if tag_list %}
+    <div class="tags-list-container">
+    {% for tag in tag_list %}
+        <a href="{% url 'tags_detail' tag.pk %}" class="tag-link">
+            <div class="chip" style="background-color: {{ tag.color|default:'#e0e0e0' }}; color: #000; padding: 10px 15px; font-size: 1.1em; display: inline-flex; align-items: center; justify-content: center;">
+                {{ tag.name }}
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No tags available yet.</p>
+{% endif %}
+{% endblock %}

@@ -1,1 +1,0 @@
-web: gunicorn mylibrary.wsgi

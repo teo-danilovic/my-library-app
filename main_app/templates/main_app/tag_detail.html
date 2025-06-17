@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Tag: {{ tag.name }}{% endblock %}
+
+{% block content %}
+<div class="tag-detail-container">
+    <h1>Tag: <span style="color: {{ tag.color|default:'#333' }};">{{ tag.name }}</span></h1>
+    <p style="background-color: {{ tag.color|default:'#e0e0e0' }}; display: inline-block; padding: 5px px; border-radius: 3px;">
+        Color: {{ tag.color }}
+    </p>
+    <hr>
+    <a href="{% url 'tags_update' tag.pk %}" class="btn waves-effect waves-light orange">Edit Tag</a>
+    <a href="{% url 'tags_delete' tag.pk %}" class="btn waves-effect waves-light red">Delete Tag</a>
+    <hr>
+
+    <h2>Books with this Tag:</h2>
+    {% if tag.book_set.all %}
+        <div class="row">
+        {% for book in tag.book_set.all %}
+            {% if book.user == user %} 
+            <div class="col s12 m6 l4">
+                <a href="{% url 'books_detail' book.id %}" class="book-link">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">{{ book.title }}</span>
+                            <p><strong>Author:</strong> {{ book.author }}</p>
+                            <p><strong>Status:</strong> {{ book.get_status_display }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+        {% if not tag.book_set.all|length %}  
+            <p>You have no books with this tag.</p>
+        {% endif %}
+    {% else %}
+        <p>No books are currently associated with this tag.</p>
+    {% endif %}
+</div>
+{% endblock %}
